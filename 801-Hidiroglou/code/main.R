@@ -41,6 +41,13 @@ n.cores  <- ifelse(test = is.macOS, yes = 2, no = parallel::detectCores() - 1);
 cat(paste0("\n# n.cores = ",n.cores,"\n"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.confusion <- utils::read.csv(
+    file = file.path(code.directory,"confusion-matrix.csv")
+    );
+rownames(DF.confusion) <- DF.confusion[,'X'];
+DF.confusion <- DF.confusion[,setdiff(colnames(DF.confusion),'X')];
+print( str(DF.confusion) );
+print(     DF.confusion  );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
