@@ -61,16 +61,14 @@ print( str(DF.conditional.probs) );
 print(     DF.conditional.probs  );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-DF.pixel.counts.CAR3504 <- utils::read.csv(
+DF.pixel.counts <- utils::read.csv(
     file = file.path(code.directory,"pixel-counts.csv")
     );
-print( str(DF.pixel.counts.CAR3504) );
-print(     DF.pixel.counts.CAR3504 );
+print( str(DF.pixel.counts) );
+print(     DF.pixel.counts );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-as.matrix(DF.conditional.probs) %*% as.matrix(DF.pixel.counts.CAR3504[,'pixel.count.CAR3504']);
-
-as.matrix(DF.conditional.probs) %*% as.matrix(DF.pixel.counts.CAR3504[,'pixel.count.ON.ACI']);
+as.matrix(DF.conditional.probs) %*% as.matrix(DF.pixel.counts[,c('pixel.count.CAR3504','pixel.count.ON.ACI')]);
 
 ##################################################
 print( warnings() );
