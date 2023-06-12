@@ -49,7 +49,28 @@ DF.confusion <- DF.confusion[,setdiff(colnames(DF.confusion),'X')];
 print( str(DF.confusion) );
 print(     DF.confusion  );
 
+totals.classified.as <- base::colSums(x = DF.confusion);
+print( totals.classified.as );
+
+DF.conditional.probs <- t(apply(
+    X      = DF.confusion,
+    MARGIN = 1,
+    FUN    = function(x) { return( x / totals.classified.as ) } 
+    ));
+print( str(DF.conditional.probs) );
+print(     DF.conditional.probs  );
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+DF.pixel.counts.CAR3504 <- utils::read.csv(
+    file = file.path(code.directory,"pixel-counts.csv")
+    );
+print( str(DF.pixel.counts.CAR3504) );
+print(     DF.pixel.counts.CAR3504 );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+as.matrix(DF.conditional.probs) %*% as.matrix(DF.pixel.counts.CAR3504[,'pixel.count.CAR3504']);
+
+as.matrix(DF.conditional.probs) %*% as.matrix(DF.pixel.counts.CAR3504[,'pixel.count.ON.ACI']);
 
 ##################################################
 print( warnings() );
