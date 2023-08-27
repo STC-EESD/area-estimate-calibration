@@ -43,12 +43,18 @@ n.cores  <- ifelse(test = is.macOS, yes = 2, no = parallel::detectCores() - 1);
 cat(paste0("\n# n.cores = ",n.cores,"\n"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-dashboard.file <- "dashboard-highcharter";
-rmarkdown::render(
-    input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
-    output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
-    output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+dashboard.files <- c(
+    "dashboard-highcharter",
+    "dashboard-leaflet"
     );
+
+for ( dashboard.file in dashboard.files ) {
+    rmarkdown::render(
+        input         = file.path(code.directory,paste0(dashboard.file,".Rmd")),
+        output_format = flexdashboard::flex_dashboard(theme = "cerulean"), # darkly
+        output_file   = file.path(output.directory,paste0(dashboard.file,".html"))
+        );
+    }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
